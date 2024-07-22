@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentCharacters">
+
+    <fragment
+        android:id="@+id/fragmentCharacters"
+        android:name="com.example.heroespractice.presentation.screen.characters.CharactersFragment"
+        tools:layout="@layout/fragment_characters">
+
+        <action
+            android:id="@+id/actionCharactersToCharacter"
+            app:destination="@id/fragmentCharacter" />
+
+        <action
+            android:id="@+id/actionCharactersToAddCharacter"
+            app:destination="@id/fragmentAddCharacter" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentAddCharacter"
+        android:name="com.example.heroespractice.presentation.screen.add_character.AddCharacterFragment"
+        tools:layout="@layout/fragment_add_character">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentCharacter"
+        android:name="com.example.heroespractice.presentation.screen.character.CharacterFragment"
+        tools:layout="@layout/fragment_character">
+
+        <action
+            android:id="@+id/actionCharacterToPlot"
+            app:destination="@id/fragmentPlot" />
+
+        <action
+            android:id="@+id/actionCharacterToPlots"
+            app:destination="@id/fragmentPlots" />
+
+        <action
+            android:id="@+id/actionCharacterToContacts"
+            app:destination="@id/fragmentContacts" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentPlot"
+        android:name="com.example.heroespractice.presentation.screen.plot.PlotFragment"
+        tools:layout="@layout/fragment_plot">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentPlots"
+        android:name="com.example.heroespractice.presentation.screen.plots.PlotsFragment"
+        tools:layout="@layout/fragment_plots">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentContacts"
+        android:name="com.example.heroespractice.presentation.screen.contacts.ContactsFragment"
+        tools:layout="@layout/fragment_contacts">
+
+        <argument
+            android:name="message_about_character_for_contact"
+            app:argType="string" />
+
+    </fragment>
+
+</navigation>

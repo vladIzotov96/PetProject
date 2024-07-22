@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground">
+
+    <View
+        android:id="@+id/backgroundColorOption"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:alpha="0.5"
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iconBackgroundOption"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundColorOption"
+        app:layout_constraintEnd_toStartOf="@+id/titleOption"
+        app:layout_constraintStart_toStartOf="@+id/backgroundColorOption"
+        app:layout_constraintTop_toTopOf="@+id/backgroundColorOption"
+        tools:src="@drawable/icon_share"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/titleOption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="2dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/dark_grey"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/descriptionOption"
+        app:layout_constraintEnd_toStartOf="@+id/iconNextOption"
+        app:layout_constraintStart_toEndOf="@+id/iconBackgroundOption"
+        app:layout_constraintTop_toTopOf="@+id/iconBackgroundOption"
+        tools:text="@string/share_character_information"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/descriptionOption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:alpha="0.5"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/dark_grey"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iconBackgroundOption"
+        app:layout_constraintEnd_toEndOf="@+id/titleOption"
+        app:layout_constraintStart_toStartOf="@+id/titleOption"
+        app:layout_constraintTop_toBottomOf="@id/titleOption"
+        tools:text="@string/with_your_contacts"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iconNextOption"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/icon_next_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundColorOption"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundColorOption"
+        app:layout_constraintStart_toEndOf="@id/titleOption"
+        app:layout_constraintTop_toTopOf="@+id/backgroundColorOption"
+
+        />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/dividerOption"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundColorOption"
+        app:layout_constraintEnd_toEndOf="@+id/iconNextOption"
+        app:layout_constraintStart_toStartOf="@+id/titleOption"
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
