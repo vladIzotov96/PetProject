@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/characterThumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/icon_logo_avengers_grey"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/characterName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/navigationIcon"
+        app:layout_constraintStart_toStartOf="@+id/characterThumbnail"
+        app:layout_constraintTop_toBottomOf="@id/characterThumbnail"
+        tools:text="American White Eagle (Jason Strongbow)"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/characterDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/navigationIcon"
+        app:layout_constraintStart_toStartOf="@id/characterName"
+        app:layout_constraintTop_toBottomOf="@id/characterName"
+        tools:text="Formerly known as Emil Blonsky, a spy of Soviet Yugoslavian origin working for the KGB, the Abomination gained his powers after receiving a dose of gamma radiation similar to that which transformed Bruce Banner into the incredible Hulk."
+
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/comicIcon"
+        android:layout_width="12dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/icon_comic"
+        app:layout_constraintStart_toStartOf="@+id/characterDescription"
+        app:layout_constraintTop_toBottomOf="@+id/characterDescription"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/comicQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/comicIcon"
+        app:layout_constraintStart_toEndOf="@+id/comicIcon"
+        app:layout_constraintTop_toTopOf="@+id/comicIcon"
+        tools:text="24 comics"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/navigationIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="12dp"
+        android:padding="6dp"
+        android:src="@drawable/icon_next_light"
+        app:layout_constraintBottom_toBottomOf="@+id/comicIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/characterName"
+
+        />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="comicIcon"
+
+        />
+
+    <Space
+        android:id="@+id/characterSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="6dp"
+        app:layout_constraintTop_toBottomOf="@id/barrier"
+
+        />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/dividerOption"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintTop_toBottomOf="@+id/characterSpace"
+
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

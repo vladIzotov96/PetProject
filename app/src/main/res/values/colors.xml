@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="avengers_red">#E6001B</color>
+    <color name="button_background">#fff4ff</color>
+    <color name="light_grey">#121A1118</color>
+    <color name="medium_grey">#ECE9EC</color>
+    <color name="ripple_medium_grey">#D1CCD1</color>
+    <color name="grey">#1F1A1118</color>
+    <color name="dark_grey">#E61A1118</color>
+    <color name="transparency">#00000000</color>
+
+    <color name="other_colors_christalle">#2F1B54</color>
+    <color name="other_colors_violet_red">#F33688</color>
+    <color name="other_colors_light_sea_green">#20C5A5</color>
+    <color name="other_colors_denim">#138CE3</color>
+    <color name="other_colors_lime_green">#33C539</color>
+    <color name="other_colors_card_dark">#3E363D</color>
+    <color name="other_colors_card_light">#DAD9D9</color>
+    <color name="other_colors_summer_sky">#3BBDDB</color>
+    <color name="other_colors_emerald">#58CB76</color>
+    <color name="other_colors_yellow_road">#F39B35</color>
+    <color name="other_colors_coral">#EE5059</color>
+    <color name="other_colors_purple">#C360F8</color>
+    <color name="other_colors_dodger_blue">#1CA7F8</color>
+    <color name="other_colors_dodger_turquoise">#3AD4DC</color>
+</resources>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground">
+
+    <View
+        android:id="@+id/characterThumbnail"
+        android:layout_width="117dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/dark_grey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+    <View
+        android:id="@+id/characterName"
+        android:layout_width="100dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/dark_grey"
+        app:layout_constraintStart_toEndOf="@id/characterThumbnail"
+        app:layout_constraintTop_toTopOf="@id/characterThumbnail"
+
+        />
+
+    <View
+        android:id="@+id/plotTitleFirstLine"
+        android:layout_width="160dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="@id/characterName"
+        app:layout_constraintTop_toBottomOf="@id/characterName"
+
+        />
+
+    <View
+        android:id="@+id/plotTitleSecondLine"
+        android:layout_width="200dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="@id/characterName"
+        app:layout_constraintTop_toBottomOf="@id/plotTitleFirstLine"
+
+        />
+
+    <View
+        android:id="@+id/characterDescriptionThirdLineFirst"
+        android:layout_width="60dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="@id/characterName"
+        app:layout_constraintTop_toBottomOf="@id/plotTitleSecondLine"
+
+        />
+
+    <View
+        android:id="@+id/characterDescriptionThirdLineSecond"
+        android:layout_width="40dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="4dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/characterDescriptionThirdLineFirst"
+        app:layout_constraintStart_toEndOf="@+id/characterDescriptionThirdLineFirst"
+        app:layout_constraintTop_toTopOf="@+id/characterDescriptionThirdLineFirst"
+
+        />
+
+    <View
+        android:id="@+id/characterDescriptionThirdLineThird"
+        android:layout_width="20dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="4dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/characterDescriptionThirdLineSecond"
+        app:layout_constraintStart_toEndOf="@+id/characterDescriptionThirdLineSecond"
+        app:layout_constraintTop_toTopOf="@+id/characterDescriptionThirdLineSecond"
+
+        />
+
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="characterThumbnail, plotTitleFirstLine"
+
+        />
+
+    <Space
+        android:id="@+id/characterSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="6dp"
+        app:layout_constraintTop_toBottomOf="@id/barrier"
+
+        />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/dividerOption"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintTop_toBottomOf="@+id/characterSpace"
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

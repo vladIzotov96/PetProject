@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/imageCharacter"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="@color/dark_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+
+    <View
+        android:id="@+id/nameCharacter"
+        android:layout_width="140dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/dark_grey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageCharacter"
+
+        />
+
+    <View
+        android:id="@+id/plotTitleFirstLine"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameCharacter"
+
+        />
+
+    <View
+        android:id="@+id/plotTitleSecondLine"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="60dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="@+id/plotTitleFirstLine"
+        app:layout_constraintStart_toStartOf="@id/plotTitleFirstLine"
+        app:layout_constraintTop_toBottomOf="@id/plotTitleFirstLine"
+
+        />
+
+    <View
+        android:id="@+id/plotTitleThirdLine"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="40dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="@+id/plotTitleFirstLine"
+        app:layout_constraintStart_toStartOf="@id/plotTitleFirstLine"
+        app:layout_constraintTop_toBottomOf="@id/plotTitleSecondLine"
+
+        />
+
+    <View
+        android:id="@+id/characterDescriptionFourthLine"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="108dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="@+id/plotTitleFirstLine"
+        app:layout_constraintStart_toStartOf="@id/plotTitleFirstLine"
+        app:layout_constraintTop_toBottomOf="@id/plotTitleThirdLine"
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
