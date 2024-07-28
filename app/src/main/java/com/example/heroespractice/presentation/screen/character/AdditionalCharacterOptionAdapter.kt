@@ -29,6 +29,8 @@ class AdditionalCharacterOptionAdapter(
 
 			if (optionsList.size - 1 == position) {
 				dividerOption.isVisible = false
+			} else {
+				dividerOption.isVisible = true
 			}
 
 			root.setOnClickListener {

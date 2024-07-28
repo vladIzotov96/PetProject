@@ -12,7 +12,7 @@ import com.example.heroespractice.presentation.model.content_provider.ContactPre
 
 class ContactsAdapter(
 	private val context: Context,
-	private val contacts: List<ContactPresentation>,
+	private var contacts: List<ContactPresentation>,
 ) :
 	BaseAdapter() {
 
@@ -39,5 +39,10 @@ class ContactsAdapter(
 		}
 
 		return view
+	}
+
+	fun updateContacts(contacts: List<ContactPresentation>) {
+		this.contacts = contacts
+		notifyDataSetChanged()
 	}
 }

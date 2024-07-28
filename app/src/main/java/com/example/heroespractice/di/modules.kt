@@ -50,6 +50,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 private val networkModule = module {
 
@@ -67,6 +68,9 @@ private val networkModule = module {
 		Retrofit.Builder()
 			.baseUrl(BASE_MARVEL_URL)
 			.client(get<OkHttpClient.Builder>()
+				.connectTimeout(30, TimeUnit.SECONDS)
+				.writeTimeout(30, TimeUnit.SECONDS)
+				.readTimeout(30, TimeUnit.SECONDS)
 				.addInterceptor(get<HttpLoggingInterceptor>())
 				.addInterceptor { chain -> createParametersDefault(chain) }
 				.build())
@@ -194,23 +198,23 @@ private val interactorModule = module {
 private val viewModelModule = module {
 
 	viewModel {
-		CharactersViewModel(get(), get())
+		CharactersViewModel(get())
 	}
 
 	viewModel {
-		CharacterViewModel(get(), get())
+		CharacterViewModel(get())
 	}
 
 	viewModel { (isNeedRequest: Boolean?) ->
-		ComicsViewModel(get(), get(), isNeedRequest)
+		ComicsViewModel(get(), isNeedRequest)
 	}
 
 	viewModel { (isNeedRequest: Boolean?) ->
-		EventsViewModel(get(), get(), isNeedRequest)
+		EventsViewModel(get(), isNeedRequest)
 	}
 
 	viewModel {
-		ContactsViewModel(get(), get())
+		ContactsViewModel(get())
 	}
 
 }

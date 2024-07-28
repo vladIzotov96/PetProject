@@ -1,78 +1,23 @@
 package com.example.heroespractice.presentation.screen.plots
 
-import android.content.Context
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.heroespractice.databinding.FragmentPlotsBinding
+import com.example.heroespractice.presentation.base.BaseFragment
 
-class PlotsFragment : Fragment() {
+class PlotsFragment : BaseFragment<FragmentPlotsBinding>(
+	fragmentTag = TAG
+) {
 
-	private lateinit var binding: FragmentPlotsBinding
-
-	override fun onCreateView(
+	/**Auxiliary fun for onCreateView() BaseFragment*/
+	override fun inflateBinding(
 		inflater: LayoutInflater,
-		container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View? {
-		Log.e(TAG, "onCreateView")
-		binding = FragmentPlotsBinding.inflate(inflater, container, false)
-		return binding.root
+		container: ViewGroup?
+	): FragmentPlotsBinding {
+		return FragmentPlotsBinding.inflate(inflater, container, false)
 	}
 
-	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		super.onViewCreated(view, savedInstanceState)
-		Log.e(TAG, "onViewCreated")
-	}
-
-	override fun onAttach(context: Context) {
-		super.onAttach(context)
-		Log.e(TAG, "onAttach")
-	}
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		Log.e(TAG, "onCreate")
-	}
-
-	override fun onStart() {
-		super.onStart()
-		Log.e(TAG, "onStart")
-	}
-
-	override fun onResume() {
-		super.onResume()
-		Log.e(TAG, "onResume")
-	}
-
-	override fun onPause() {
-		super.onPause()
-		Log.e(TAG, "onPause")
-	}
-
-	override fun onStop() {
-		super.onStop()
-		Log.e(TAG, "onStop")
-	}
-
-	override fun onDestroyView() {
-		super.onDestroyView()
-		Log.e(TAG, "onDestroyView")
-	}
-
-	override fun onDestroy() {
-		super.onDestroy()
-		Log.e(TAG, "onDestroy")
-	}
-
-	override fun onDetach() {
-		super.onDetach()
-		Log.e(TAG, "onDetach")
-	}
-
+	/**Companion object*/
 	companion object {
 		private const val TAG = "Lifecycle_Fragment_PlotsFragment"
 	}

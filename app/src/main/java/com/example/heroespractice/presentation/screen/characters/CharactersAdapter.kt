@@ -72,6 +72,11 @@ class CharactersAdapter(
 		notifyDataSetChanged()
 	}
 
+	fun updateCharacters(characters: List<CharacterPresentation>) {
+		this.characters = characters
+		notifyDataSetChanged()
+	}
+
 	class CharacterViewHolder(
 		private val binding: ViewBinding,
 		private val context: Context,

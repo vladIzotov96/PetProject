@@ -23,30 +23,12 @@ import org.koin.android.ext.android.inject
 
 class VideoDownloadService : Service() {
 
+	/**Injection*/
 	private val interactor: DownloadInteractorImpl by inject()
 
+	/**Service fields*/
 	private var notificationManager: NotificationManager? = null
 	private var compositeDisposable = CompositeDisposable()
-
-	companion object {
-		/**Logs*/
-		private const val TAG = "VideoDownloadService"
-
-		/**Intent*/
-		private const val EXTRA_URL = "url"
-
-		/**Notifications*/
-		private const val CHANNEL_ID = "download_channel"
-		private const val CHANNEL_NAME = "Download Service Channel"
-		private const val START_AND_FINAL_NOTIFICATIONS_WITH_DIFFERENT_IDS = 100
-
-		fun startService(context: Context, url: String) {
-			val intent = Intent(context, VideoDownloadService::class.java).apply {
-				putExtra(EXTRA_URL, url)
-			}
-			context.startForegroundService(intent)
-		}
-	}
 
 	override fun onCreate() {
 		super.onCreate()
@@ -97,6 +79,19 @@ class VideoDownloadService : Service() {
 		return START_STICKY
 	}
 
+	override fun onBind(intent: Intent?): IBinder? {
+		return null
+	}
+
+	override fun onDestroy() {
+		compositeDisposable.clear()
+		super.onDestroy()
+	}
+
+	/**
+	 * Auxiliaries functions
+	 * */
+
 	private fun startNotification(startId: Int): Notification {
 		/**Targeting S+ (version 31 and above) requires that one of FLAG_IMMUTABLE or FLAG_MUTABLE be specified when creating a PendingIntent.
 		Strongly consider using FLAG_IMMUTABLE, only use FLAG_MUTABLE if some functionality depends on the PendingIntent being mutable, e.g. if it needs to be used with inline replies or bubbles.*/
@@ -143,12 +138,23 @@ class VideoDownloadService : Service() {
 		LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
 	}
 
-	override fun onBind(intent: Intent?): IBinder? {
-		return null
-	}
+	companion object {
+		/**Logs*/
+		private const val TAG = "VideoDownloadService"
 
-	override fun onDestroy() {
-		compositeDisposable.clear()
-		super.onDestroy()
+		/**Intent*/
+		private const val EXTRA_URL = "url"
+
+		/**Notifications*/
+		private const val CHANNEL_ID = "download_channel"
+		private const val CHANNEL_NAME = "Download Service Channel"
+		private const val START_AND_FINAL_NOTIFICATIONS_WITH_DIFFERENT_IDS = 100
+
+		fun startService(context: Context, url: String) {
+			val intent = Intent(context, VideoDownloadService::class.java).apply {
+				putExtra(EXTRA_URL, url)
+			}
+			context.startForegroundService(intent)
+		}
 	}
 }

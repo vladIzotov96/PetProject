@@ -2,7 +2,6 @@ package com.example.heroespractice.presentation.screen.add_character
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -14,33 +13,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.example.heroespractice.R
 import com.example.heroespractice.databinding.FragmentAddCharacterBinding
-import com.example.heroespractice.domain.base.ContextResources
+import com.example.heroespractice.presentation.base.BaseFragment
 import com.example.heroespractice.presentation.utils.SnackbarUtil
-import org.koin.android.ext.android.inject
 
-class AddCharacterFragment : Fragment() {
+class AddCharacterFragment : BaseFragment<FragmentAddCharacterBinding>(
+	fragmentTag = TAG
+) {
 
-	private val contextResources: ContextResources by inject()
-	private lateinit var binding: FragmentAddCharacterBinding
-
+	/**Fragment fields*/
 	private var pendingAction: (() -> Unit)? = null
 
-	override fun onCreateView(
+	/**Auxiliary fun for onCreateView() BaseFragment*/
+	override fun inflateBinding(
 		inflater: LayoutInflater,
-		container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View? {
-		Log.e(TAG, "onCreateView")
-		binding = FragmentAddCharacterBinding.inflate(inflater, container, false)
-		return binding.root
+		container: ViewGroup?
+	): FragmentAddCharacterBinding {
+		return FragmentAddCharacterBinding.inflate(inflater, container, false)
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		Log.e(TAG, "onViewCreated")
 
 		with(binding) {
 			pickCharacterImageButton.setOnClickListener {
@@ -60,6 +54,10 @@ class AddCharacterFragment : Fragment() {
 		}
 
 	}
+
+	/**
+	 * Auxiliaries functions
+	 * */
 
 	private val requestPermissionLauncher = registerForActivityResult(
 		ActivityResultContracts.RequestPermission()
@@ -124,51 +122,7 @@ class AddCharacterFragment : Fragment() {
 		}
 	}
 
-	override fun onAttach(context: Context) {
-		super.onAttach(context)
-		Log.e(TAG, "onAttach")
-	}
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		Log.e(TAG, "onCreate")
-	}
-
-	override fun onStart() {
-		super.onStart()
-		Log.e(TAG, "onStart")
-	}
-
-	override fun onResume() {
-		super.onResume()
-		Log.e(TAG, "onResume")
-	}
-
-	override fun onPause() {
-		super.onPause()
-		Log.e(TAG, "onPause")
-	}
-
-	override fun onStop() {
-		super.onStop()
-		Log.e(TAG, "onStop")
-	}
-
-	override fun onDestroyView() {
-		super.onDestroyView()
-		Log.e(TAG, "onDestroyView")
-	}
-
-	override fun onDestroy() {
-		super.onDestroy()
-		Log.e(TAG, "onDestroy")
-	}
-
-	override fun onDetach() {
-		super.onDetach()
-		Log.e(TAG, "onDetach")
-	}
-
+	/**Companion object*/
 	companion object {
 		private const val TAG = "Lifecycle_Fragment_AddCharacterFragment"
 	}

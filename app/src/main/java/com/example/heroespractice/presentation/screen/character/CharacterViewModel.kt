@@ -1,50 +1,38 @@
 package com.example.heroespractice.presentation.screen.character
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.heroespractice.R
-import com.example.heroespractice.domain.base.ContextResources
 import com.example.heroespractice.domain.interactor.marvel.MarvelInteractor
+import com.example.heroespractice.presentation.base.BaseViewModel
 import com.example.heroespractice.presentation.model.character.CharacterPresentation
-import com.example.heroespractice.presentation.utils.handleProgress
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 class CharacterViewModel(
 	private val interactor: MarvelInteractor,
-	private val contextResources: ContextResources,
-) : ViewModel() {
+) : BaseViewModel(
+	viewModelTag = TAG
+) {
 
-	init {
-		Log.e(TAG, "Initialized")
-	}
-
-	private val _isLoadingCharacter = MutableLiveData(false)
-	val isLoadingCharacter: LiveData<Boolean> = _isLoadingCharacter
-
+	/**LiveData fields*/
 	private val _character = MutableLiveData<CharacterPresentation>()
 	val character: LiveData<CharacterPresentation> = _character
 
 	private val _screenDescription = MutableLiveData<String>()
 	val screenDescription: LiveData<String> = _screenDescription
 
-	private val compositeDisposable = CompositeDisposable()
+	/**ViewModel fields*/
+	var isFirstLoadOfScreen = true
 
-	fun getData(characterId: Long) {
+	/**Get data from the server*/
+	fun getCharacterByCharacterId(characterId: Long) {
 		if (!character.isInitialized) {
-			interactor.getCharacterByCharacterId(characterId)
-				.subscribeOn(Schedulers.io())
-				.observeOn(AndroidSchedulers.mainThread())
-				.handleProgress {
-					_isLoadingCharacter.postValue(it)
-				}
-				.subscribe({ characterPresentation ->
+			handleSingle(
+				single = interactor.getCharacterByCharacterId(characterId),
+				onSuccess = { characterPresentation ->
 					_character.postValue(characterPresentation)
 					_screenDescription.postValue("")
-				}, { throwable ->
+				},
+				onError = { throwable ->
 					when (throwable) {
 						is NoSuchElementException -> {
 							_screenDescription.postValue(contextResources.getString(R.string.no_character))
@@ -57,18 +45,31 @@ class CharacterViewModel(
 							)
 						}
 					}
-				}).apply {
-					compositeDisposable.add(this)
 				}
+			)
 		}
 	}
 
-	override fun onCleared() {
-		compositeDisposable.clear()
-		super.onCleared()
-		Log.e(TAG, "onCleared")
-	}
+	fun createMessageAboutCharacterForContact(character: CharacterPresentation): String =
+		contextResources.getString(R.string.want_to_introduce_character) +
+				" " +
+				character.name +
+				"!\n\n" +
+				if (character.isDescription) {
+					character.description +
+							"\n\n"
+				} else {
+					""
+				} +
+				contextResources.getString(R.string.learn_more_about_character) +
+				" " +
+				character.name +
+				" " +
+				contextResources.getString(R.string.via_link) +
+				" " +
+				character.plotsUrl
 
+	/**Companion object*/
 	companion object {
 		private const val TAG = "Lifecycle_ViewModel_CharacterViewModel"
 	}

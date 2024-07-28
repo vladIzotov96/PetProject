@@ -128,16 +128,22 @@
         </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/comicsRecyclerView"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        tools:itemCount="20" />
+        app:layout_constraintTop_toBottomOf="@+id/editText">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/comicsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="20" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textOnHeroes"

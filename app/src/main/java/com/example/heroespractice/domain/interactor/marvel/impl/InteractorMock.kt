@@ -9,6 +9,7 @@ import io.reactivex.Single
 class InteractorMock : MarvelInteractor {
 	override fun getCharacters(): Single<List<CharacterPresentation>> {
 		return Single.just(severalCharacter)
+		//return Single.error(NoSuchElementException())
 	}
 
 	override fun getCharacterByCharacterId(characterId: Long): Single<CharacterPresentation> {
@@ -72,29 +73,77 @@ class InteractorMock : MarvelInteractor {
 		PlotDomain(
 			id = 103120,
 			type = PlotType.COMIC,
-			title = "Avengers: The Initiative (2007) #19",
+			title = "Comic: #1",
 			thumbnail = ""
 		),
 		PlotDomain(
 			id = 103121,
 			type = PlotType.COMIC,
-			title = "Avengers: The Initiative (2007) #19",
+			title = "Comic: #2",
 			thumbnail = ""
-		)
+		),
+		PlotDomain(
+			id = 103121,
+			type = PlotType.COMIC,
+			title = "Comic: #3",
+			thumbnail = ""
+		),
+		PlotDomain(
+			id = 103121,
+			type = PlotType.COMIC,
+			title = "Comic: #4",
+			thumbnail = ""
+		),
+		PlotDomain(
+			id = 103121,
+			type = PlotType.COMIC,
+			title = "Comic: #5",
+			thumbnail = ""
+		),
+		PlotDomain(
+			id = 103121,
+			type = PlotType.COMIC,
+			title = "Comic: #6",
+			thumbnail = ""
+		),
 	)
 
 	private val event = listOf(
 		PlotDomain(
 			id = 103122,
 			type = PlotType.EVENT,
-			title = "Avengers: The Initiative (2007) #19",
+			title = "Event: #1",
 			thumbnail = ""
 		),
 		PlotDomain(
 			id = 103123,
 			type = PlotType.EVENT,
-			title = "Avengers: The Initiative (2007) #19",
+			title = "Event: #2",
 			thumbnail = ""
-		)
+		),
+		PlotDomain(
+			id = 103120,
+			type = PlotType.EVENT,
+			title = "Event: #3",
+			thumbnail = ""
+		),
+		PlotDomain(
+			id = 103120,
+			type = PlotType.EVENT,
+			title = "Event: #4",
+			thumbnail = ""
+		),
+		PlotDomain(
+			id = 103120,
+			type = PlotType.EVENT,
+			title = "Event: #5",
+			thumbnail = ""
+		),
+		PlotDomain(
+			id = 103120,
+			type = PlotType.EVENT,
+			title = "Event: #6",
+			thumbnail = ""
+		),
 	)
 }

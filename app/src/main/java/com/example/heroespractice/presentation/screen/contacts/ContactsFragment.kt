@@ -1,77 +1,104 @@
 package com.example.heroespractice.presentation.screen.contacts
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import com.example.heroespractice.R
 import com.example.heroespractice.databinding.FragmentContactsBinding
-import com.example.heroespractice.domain.base.ContextResources
+import com.example.heroespractice.presentation.base.BaseFragment
 import com.example.heroespractice.presentation.utils.SnackbarUtil
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ContactsFragment : Fragment() {
+class ContactsFragment : BaseFragment<FragmentContactsBinding>(
+	fragmentTag = TAG
+) {
 
+	/**Injection*/
 	private val viewModel: ContactsViewModel by viewModel()
-	private val contextResources: ContextResources by inject()
 
-	private lateinit var binding: FragmentContactsBinding
+	/**Fragment fields*/
 	private var messageAboutCharacterForContact: String? = null
+	private lateinit var adapter: ContactsAdapter
 
-	override fun onCreateView(
+	/**Auxiliary fun for onCreateView() BaseFragment*/
+	override fun inflateBinding(
 		inflater: LayoutInflater,
-		container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View? {
-		Log.e(TAG, "onCreateView")
-		messageAboutCharacterForContact = arguments?.getString(MESSAGE_ABOUT_CHARACTER_FOR_CONTACT)
-		binding = FragmentContactsBinding.inflate(inflater, container, false)
-		return binding.root
+		container: ViewGroup?
+	): FragmentContactsBinding {
+		return FragmentContactsBinding.inflate(inflater, container, false)
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		Log.e(TAG, "onViewCreated")
 
-		with(viewModel) {
-			getContacts()
+		messageAboutCharacterForContact = arguments?.getString(MESSAGE_ABOUT_CHARACTER_FOR_CONTACT)
 
-			contacts.observe(viewLifecycleOwner) { contacts ->
-				val listView = binding.listViewContacts
+		adapter = ContactsAdapter(requireContext(), emptyList())
+		binding.listViewContacts.adapter = adapter
 
-				val adapter = ContactsAdapter(requireContext(), contacts)
-				listView.adapter = adapter
+		viewModel.getContacts()
+		viewModelObserveContacts()
+		viewModelObserveScreenDescription()
+		viewModelObserveIsLoading()
+	}
 
-				listView.setOnItemClickListener { _, _, position, _ ->
-					sendSms(contacts[position].name, contacts[position].number)
-				}
+	/**
+	 * ViewModel observe functions
+	 * */
+
+	private fun viewModelObserveContacts() {
+		viewModel.contacts.observe(viewLifecycleOwner) { contacts ->
+			val listView = binding.listViewContacts
+
+			adapter.updateContacts(contacts)
+
+			listView.setOnItemClickListener { _, _, position, _ ->
+				sendSms(contacts[position].name, contacts[position].number)
 			}
+		}
+	}
 
-			screenDescription.observe(viewLifecycleOwner) { screenDescription ->
-				binding.textContacts.text = screenDescription
+	private fun viewModelObserveScreenDescription() {
+		viewModel.screenDescription.observe(viewLifecycleOwner) { screenDescription ->
+			binding.textContacts.text = screenDescription
 
-				if (!screenDescription.isNullOrEmpty()) {
-					SnackbarUtil.showSnackbar(
-						view,
-						screenDescription,
-						actionText = contextResources.getString(R.string.ok)
-					)
-					with(binding) {
-						textContacts.text = screenDescription
-						textContacts.isVisible = true
-						imageContacts.isVisible = true
-					}
+			if (!screenDescription.isNullOrEmpty()) {
+				SnackbarUtil.showSnackbar(
+					binding.root,
+					screenDescription,
+					actionText = contextResources.getString(R.string.ok)
+				)
+				with(binding) {
+					textContacts.text = screenDescription
+					textContacts.isVisible = true
+					imageContacts.isVisible = true
 				}
 			}
 		}
 	}
+
+	private fun viewModelObserveIsLoading() {
+		viewModel.isLoading.observe(viewLifecycleOwner) { isLoadingHeroes ->
+			with(binding.shimmerViewContainer) {
+				visibility = if (isLoadingHeroes) {
+					startShimmer()
+					View.VISIBLE
+
+				} else {
+					stopShimmer()
+					View.GONE
+				}
+			}
+		}
+	}
+
+	/**
+	 * Auxiliaries functions
+	 * */
 
 	private fun sendSms(name: String, phoneNumber: String) {
 		val fullMessageWithAddedName =
@@ -85,56 +112,7 @@ class ContactsFragment : Fragment() {
 		startActivity(smsIntent)
 	}
 
-	override fun onSaveInstanceState(outState: Bundle) {
-		super.onSaveInstanceState(outState)
-		Log.e(TAG, "onSaveInstanceState")
-	}
-
-	override fun onAttach(context: Context) {
-		super.onAttach(context)
-		Log.e(TAG, "onAttach")
-	}
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		Log.e(TAG, "onCreate")
-	}
-
-	override fun onStart() {
-		super.onStart()
-		Log.e(TAG, "onStart")
-	}
-
-	override fun onResume() {
-		super.onResume()
-		Log.e(TAG, "onResume")
-	}
-
-	override fun onPause() {
-		super.onPause()
-		Log.e(TAG, "onPause")
-	}
-
-	override fun onStop() {
-		super.onStop()
-		Log.e(TAG, "onStop")
-	}
-
-	override fun onDestroyView() {
-		super.onDestroyView()
-		Log.e(TAG, "onDestroyView")
-	}
-
-	override fun onDestroy() {
-		super.onDestroy()
-		Log.e(TAG, "onDestroy")
-	}
-
-	override fun onDetach() {
-		super.onDetach()
-		Log.e(TAG, "onDetach")
-	}
-
+	/**Companion object*/
 	companion object {
 		private const val TAG = "Lifecycle_Fragment_ContactsFragment"
 		private const val MESSAGE_ABOUT_CHARACTER_FOR_CONTACT =

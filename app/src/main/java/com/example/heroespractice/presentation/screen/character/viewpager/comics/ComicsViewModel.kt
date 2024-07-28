@@ -1,55 +1,42 @@
 package com.example.heroespractice.presentation.screen.character.viewpager.comics
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.heroespractice.R
-import com.example.heroespractice.domain.base.ContextResources
 import com.example.heroespractice.domain.interactor.marvel.MarvelInteractor
 import com.example.heroespractice.domain.model.comics.PlotDomain
-import com.example.heroespractice.presentation.utils.handleProgress
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import com.example.heroespractice.presentation.base.BaseViewModel
 
 class ComicsViewModel(
 	private val interactor: MarvelInteractor,
-	private val contextResources: ContextResources,
 	private val isNeedRequest: Boolean?,
-) : ViewModel() {
+) : BaseViewModel(
+	viewModelTag = TAG
+) {
 
-	init {
-		Log.e(TAG, "Initialized")
-	}
-
-	private val _isLoadingComics = MutableLiveData(false)
-	val isLoadingComics: LiveData<Boolean> = _isLoadingComics
-
+	/**LiveData fields*/
 	private val _comics = MutableLiveData<List<PlotDomain>>()
 	val comics: LiveData<List<PlotDomain>> = _comics
 
 	private val _comicsDescription = MutableLiveData<String>()
 	val comicsDescription: LiveData<String> = _comicsDescription
 
+	/**ViewModel fields*/
 	private var isRequestInProgress = false
-	private val compositeDisposable = CompositeDisposable()
 
-	fun getData(characterId: Long) {
+	/**Get data from the server*/
+	fun getComicsByCharacterId(characterId: Long) {
 		if (!comics.isInitialized && isNeedRequest == true && !isRequestInProgress) {
 			isRequestInProgress = true
 			_comicsDescription.postValue("")
 
-			interactor.getComicsByCharacterId(characterId)
-				.subscribeOn(Schedulers.io())
-				.observeOn(AndroidSchedulers.mainThread())
-				.handleProgress {
-					_isLoadingComics.postValue(it)
-				}
-				.subscribe({ comicsList ->
+			handleSingle(
+				single = interactor.getComicsByCharacterId(characterId),
+				onSuccess = { comicsList ->
 					_comics.postValue(comicsList)
 					isRequestInProgress = false
-				}, { throwable ->
+				},
+				onError = { throwable ->
 					when (throwable) {
 						is NoSuchElementException -> {
 							_comicsDescription.postValue(contextResources.getString(R.string.no_comics))
@@ -63,20 +50,14 @@ class ComicsViewModel(
 						}
 					}
 					isRequestInProgress = false
-				}).apply {
-					compositeDisposable.add(this)
 				}
+			)
 		} else if (!comics.isInitialized && !isRequestInProgress) {
 			_comicsDescription.postValue(contextResources.getString(R.string.no_comics))
 		}
 	}
 
-	override fun onCleared() {
-		compositeDisposable.clear()
-		super.onCleared()
-		Log.e(TAG, "onCleared")
-	}
-
+	/**Companion object*/
 	companion object {
 		private const val TAG = "Lifecycle_ViewModel_ComicsViewModel"
 	}

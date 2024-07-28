@@ -20,12 +20,13 @@ import org.koin.java.KoinJavaComponent
 class PlotAdapter(
 	private var plots: List<PlotDomain>,
 	private val context: Context,
-	private val isNeedAllItemType: Boolean,
 	private val onClick: () -> Unit,
 	private val onShowAllClick: () -> Unit,
 ) : RecyclerView.Adapter<PlotAdapter.PlotViewHolder>() {
 
 	private val heroesService: HeroesService by KoinJavaComponent.inject(clazz = HeroesService::class.java)
+
+	private var isNeedAllItemType = false
 
 	private companion object {
 		const val ITEM_TYPE = 0
@@ -66,6 +67,12 @@ class PlotAdapter(
 				}
 			}
 		}
+	}
+
+	fun updatePlots(plots: List<PlotDomain>, isNeedAllItemType: Boolean) {
+		this.plots = plots
+		this.isNeedAllItemType = isNeedAllItemType
+		notifyDataSetChanged()
 	}
 
 	class PlotViewHolder(

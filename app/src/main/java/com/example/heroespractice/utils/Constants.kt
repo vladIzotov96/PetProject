@@ -11,8 +11,7 @@ const val PIXABAY_API = "pixabay_api"
 const val BASE_PIXABAY_URL = "https://cdn.pixabay.com/"
 
 /**Interactor settings*/
-const val USE_MOCK_DATA = false
-
+const val USE_MOCK_DATA = true
 /**Repository settings
  *
  * DATA_SOURCE_NETWORK_AND_DATABASE = true + DATA_SOURCE_NETWORK = any – usage of GeneralRepository

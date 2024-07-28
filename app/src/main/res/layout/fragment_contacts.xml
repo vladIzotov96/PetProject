@@ -22,6 +22,49 @@
 
         />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleContacts"
+        app:shimmer_auto_start="false">
+
+        <LinearLayout
+            android:id="@+id/squareSkeleton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/skeleton_item_contact" />
+
+            <include layout="@layout/skeleton_item_contact" />
+
+            <include layout="@layout/skeleton_item_contact" />
+
+            <include layout="@layout/skeleton_item_contact" />
+
+            <include layout="@layout/skeleton_item_contact" />
+
+            <include layout="@layout/skeleton_item_contact" />
+
+            <include layout="@layout/skeleton_item_contact" />
+
+            <include layout="@layout/skeleton_item_contact" />
+
+            <include layout="@layout/skeleton_item_contact" />
+
+            <include layout="@layout/skeleton_item_contact" />
+
+            <include layout="@layout/skeleton_item_contact" />
+
+            <include layout="@layout/skeleton_item_contact" />
+
+            <include layout="@layout/skeleton_item_contact" />
+
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <ListView
         android:id="@+id/listViewContacts"
         android:layout_width="match_parent"
@@ -30,8 +73,8 @@
         android:dividerHeight="12dp"
         android:overScrollMode="never"
         android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@+id/titleContacts"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleContacts"
 
         />
 
